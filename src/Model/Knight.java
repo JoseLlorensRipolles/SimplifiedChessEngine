@@ -1,12 +1,13 @@
 package Model;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Created by JoseLlorens on 12/10/2016.
  */
-public class Knight extends Piece{
+public class Knight extends Piece {
 
     public Knight(int x, int y,int color){
         name= "Knight";
@@ -18,10 +19,16 @@ public class Knight extends Piece{
 
     @Override
     public List<Board> posMov(Board board) {
-        List<Board> res = new LinkedList<>();
+        int turn;
+        if(board.getTurn() == Piece.WHITE){
+            turn = Piece.BLACK;
+        }else{
+            turn = Piece.WHITE;
+        }
+        List<Board> res = new ArrayList<>();
         if(x-2>=0 && y-1>=0){
             if(board.getBoard()[x-2][y-1] == null){
-                Board newBoard = new Board();
+                Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                 Piece[][] table = copyBoard(board.getBoard());
                 table[this.x][this.y]=null;
                 table[x-2][y-1] = new Knight(x-2,y-1,this.color);
@@ -30,7 +37,7 @@ public class Knight extends Piece{
 
             }else {
                 if (board.getBoard()[x-2][y-1].getColor() != this.color) {
-                    Board newBoard = new Board();
+                    Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                     Piece[][] table = copyBoard(board.getBoard());
                     table[this.x][this.y]=null;
                     table[x-2][y-1] = new Knight(x-2,y-1,this.color);
@@ -41,7 +48,7 @@ public class Knight extends Piece{
         }
         if(x-1>=0 && y-2>=0){
             if(board.getBoard()[x-1][y-2] == null){
-                Board newBoard = new Board();
+                Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                 Piece[][] table = copyBoard(board.getBoard());
                 table[this.x][this.y]=null;
                 table[x-1][y-2] = new Knight(x-1,y-2,this.color);
@@ -50,7 +57,7 @@ public class Knight extends Piece{
 
             }else {
                 if (board.getBoard()[x-1][y-2].getColor() != this.color) {
-                    Board newBoard = new Board();
+                    Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                     Piece[][] table = copyBoard(board.getBoard());
                     table[this.x][this.y]=null;
                     table[x-1][y-2] = new Knight(x-1,y-2,this.color);
@@ -62,7 +69,7 @@ public class Knight extends Piece{
 
         if(x+2<4 && y+1<4){
             if(board.getBoard()[x+2][y+1] == null){
-                Board newBoard = new Board();
+                Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                 Piece[][] table = copyBoard(board.getBoard());
                 table[this.x][this.y]=null;
                 table[x+2][y+1] = new Knight(x+2,y+1,this.color);
@@ -71,7 +78,7 @@ public class Knight extends Piece{
 
             }else {
                 if (board.getBoard()[x+2][y+1].getColor() != this.color) {
-                    Board newBoard = new Board();
+                    Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                     Piece[][] table = copyBoard(board.getBoard());
                     table[this.x][this.y]=null;
                     table[x+2][y+1] = new Knight(x+2,y+1,this.color);
@@ -82,7 +89,7 @@ public class Knight extends Piece{
         }
         if(x+1<4 && y+2<4){
             if(board.getBoard()[x+1][y+2] == null){
-                Board newBoard = new Board();
+                Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                 Piece[][] table = copyBoard(board.getBoard());
                 table[this.x][this.y]=null;
                 table[x+1][y+2] = new Knight(x+1,y+2,this.color);
@@ -91,7 +98,7 @@ public class Knight extends Piece{
 
             }else {
                 if (board.getBoard()[x+1][y+2].getColor() != this.color) {
-                    Board newBoard = new Board();
+                    Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                     Piece[][] table = copyBoard(board.getBoard());
                     table[this.x][this.y]=null;
                     table[x+1][y+2] = new Knight(x+1,y+2,this.color);
@@ -100,10 +107,10 @@ public class Knight extends Piece{
                 }
             }
         }
-        
+
         if(x+2<4 && y-1>=0){
             if(board.getBoard()[x+2][y-1] == null){
-                Board newBoard = new Board();
+                Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                 Piece[][] table = copyBoard(board.getBoard());
                 table[this.x][this.y]=null;
                 table[x+2][y-1] = new Knight(x+2,y-1,this.color);
@@ -112,7 +119,7 @@ public class Knight extends Piece{
 
             }else {
                 if (board.getBoard()[x+2][y-1].getColor() != this.color) {
-                    Board newBoard = new Board();
+                    Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                     Piece[][] table = copyBoard(board.getBoard());
                     table[this.x][this.y]=null;
                     table[x+2][y-1] = new Knight(x+2,y-1,this.color);
@@ -123,7 +130,7 @@ public class Knight extends Piece{
         }
         if(x+1<4 && y-2>=0){
             if(board.getBoard()[x+1][y-2] == null){
-                Board newBoard = new Board();
+                Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                 Piece[][] table = copyBoard(board.getBoard());
                 table[this.x][this.y]=null;
                 table[x+1][y-2] = new Knight(x+1,y-2,this.color);
@@ -132,7 +139,7 @@ public class Knight extends Piece{
 
             }else {
                 if (board.getBoard()[x+1][y-2].getColor() != this.color) {
-                    Board newBoard = new Board();
+                    Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                     Piece[][] table = copyBoard(board.getBoard());
                     table[this.x][this.y]=null;
                     table[x+1][y-2] = new Knight(x+1,y-2,this.color);
@@ -143,7 +150,7 @@ public class Knight extends Piece{
         }
         if(x-2>=0 && y+1<4){
             if(board.getBoard()[x-2][y+1] == null){
-                Board newBoard = new Board();
+                Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                 Piece[][] table = copyBoard(board.getBoard());
                 table[this.x][this.y]=null;
                 table[x-2][y+1] = new Knight(x-2,y+1,this.color);
@@ -152,7 +159,7 @@ public class Knight extends Piece{
 
             }else {
                 if (board.getBoard()[x-2][y+1].getColor() != this.color) {
-                    Board newBoard = new Board();
+                    Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                     Piece[][] table = copyBoard(board.getBoard());
                     table[this.x][this.y]=null;
                     table[x-2][y+1] = new Knight(x-2,y+1,this.color);
@@ -163,7 +170,7 @@ public class Knight extends Piece{
         }
         if(x-1>=0 && y+2<4){
             if(board.getBoard()[x-1][y+2] == null){
-                Board newBoard = new Board();
+                Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                 Piece[][] table = copyBoard(board.getBoard());
                 table[this.x][this.y]=null;
                 table[x-1][y+2] = new Knight(x-1,y+2,this.color);
@@ -172,7 +179,7 @@ public class Knight extends Piece{
 
             }else {
                 if (board.getBoard()[x-1][y+2].getColor() != this.color) {
-                    Board newBoard = new Board();
+                    Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                     Piece[][] table = copyBoard(board.getBoard());
                     table[this.x][this.y]=null;
                     table[x-1][y+2] = new Knight(x-1,y+2,this.color);
@@ -201,9 +208,9 @@ public class Knight extends Piece{
 
     @Override
     public boolean equals(Object o) {
-        if(o instanceof Knight ){
+        if(o instanceof Knight){
 
-                Knight q = (Knight) o;
+            Knight q = (Knight) o;
             if(this.x == q.getX() && this.y ==q.getY() && this.color == q.getColor()){
                 return true;
             }else{

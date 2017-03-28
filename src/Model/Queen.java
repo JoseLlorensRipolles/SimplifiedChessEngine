@@ -1,5 +1,6 @@
 package Model;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
 /**
  * Created by JoseLlorens on 12/10/2016.
  */
-public class Queen extends Piece{
+public class Queen extends Piece {
 
     public Queen(int x, int y, int color){
         name= "Queen";
@@ -25,13 +26,19 @@ public class Queen extends Piece{
     @Override
     public List<Board> posMov(Board board) {
 
-        List<Board> res = new LinkedList<>();
+        List<Board> res = new ArrayList<>();
+        int turn;
+        if(board.getTurn() == Piece.WHITE){
+            turn = Piece.BLACK;
+        }else{
+            turn = Piece.WHITE;
+        }
 
         for(int i = 1;i<4;i++){
             if(x-i>=0 && y-i >=0){
                 //If the destination is empty queen can go there
                 if(board.getBoard()[x-i][y-i] == null){
-                    Board newBoard = new Board();
+                    Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                     Piece[][] table = copyBoard(board.getBoard());
                     if((this.x>=table[0].length || this.x<0) || (this.y>=table[0].length || this.y<0)){
                         System.out.println("sasdasda");
@@ -43,7 +50,7 @@ public class Queen extends Piece{
 
                 }else {
                     if (board.getBoard()[x - i][y - i].getColor() != this.color) {
-                        Board newBoard = new Board();
+                        Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                         Piece[][] table = copyBoard(board.getBoard());
                         table[this.x][this.y]=null;
                         table[x-i][y-i] = new Queen(x-i,y-i,this.color);
@@ -61,7 +68,7 @@ public class Queen extends Piece{
         for(int i = 1;i<4;i++){
             if(x+i<4 && y+i <4){
                 if(board.getBoard()[x+i][y+i] == null){
-                    Board newBoard = new Board();
+                    Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                     Piece[][] table = copyBoard(board.getBoard());
                     if(this.x<0||this.y<0){
                         System.out.println("Que merdes pasa ?");
@@ -72,7 +79,7 @@ public class Queen extends Piece{
                     res.add(newBoard);
                 }else {
                     if (board.getBoard()[x + i][y + i].getColor() != this.color) {
-                        Board newBoard = new Board();
+                        Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                         Piece[][] table = copyBoard(board.getBoard());
                         table[this.x][this.y]=null;
                         table[x+i][y+i] = new Queen(x+i,y+i,this.color);
@@ -89,7 +96,7 @@ public class Queen extends Piece{
         for(int i = 1;i<4;i++){
             if(x-i>=0 && y+i <4){
                 if(board.getBoard()[x-i][y+i] == null){
-                    Board newBoard = new Board();
+                    Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                     Piece[][] table = copyBoard(board.getBoard());
                     table[this.x][this.y]=null;
                     table[x-i][y+i] = new Queen(x-i,y+i,this.color);
@@ -97,7 +104,7 @@ public class Queen extends Piece{
                     res.add(newBoard);
                 }else {
                     if (board.getBoard()[x-i][y + i].getColor() != this.color) {
-                        Board newBoard = new Board();
+                        Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                         Piece[][] table = copyBoard(board.getBoard());
                         table[this.x][this.y]=null;
                         table[x-i][y+i] = new Queen(x-i,y+i,this.color);
@@ -115,7 +122,7 @@ public class Queen extends Piece{
         for(int i = 1;i<4;i++){
             if(x+i<4 && y-i>=0){
                 if(board.getBoard()[x+i][y-i] == null){
-                    Board newBoard = new Board();
+                    Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                     Piece[][] table = copyBoard(board.getBoard());
                     table[this.x][this.y]=null;
                     table[x+i][y-i] = new Queen(x+i,y-i,this.color);
@@ -123,7 +130,7 @@ public class Queen extends Piece{
                     res.add(newBoard);
                 }else {
                     if (board.getBoard()[x+i][y-i].getColor() != this.color) {
-                        Board newBoard = new Board();
+                        Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                         Piece[][] table = copyBoard(board.getBoard());
                         table[this.x][this.y]=null;
                         table[x+i][y-i] = new Queen(x+1,y-i,this.color);
@@ -137,11 +144,11 @@ public class Queen extends Piece{
                 }
             }
         }
-        
+
         for(int i = 1; i<4;i++){
             if(x-i>=0){
                 if(board.getBoard()[x-i][y]==null){
-                    Board newBoard = new Board();
+                    Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                     Piece[][] table = copyBoard(board.getBoard());
                     table[this.x][this.y]=null;
                     table[x-i][y] = new Queen(x-i,y,this.color);
@@ -149,7 +156,7 @@ public class Queen extends Piece{
                     res.add(newBoard);
                 }else{
                     if(board.getBoard()[x-i][y].getColor()!=color){
-                        Board newBoard = new Board();
+                        Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                         Piece[][] table = copyBoard(board.getBoard());
                         table[this.x][this.y]=null;
                         table[x-i][y] = new Queen(x-1,y,this.color);
@@ -165,7 +172,7 @@ public class Queen extends Piece{
         for(int i = 1; i<4;i++){
             if(x+i<4){
                 if(board.getBoard()[x+i][y]==null){
-                    Board newBoard = new Board();
+                    Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                     Piece[][] table = copyBoard(board.getBoard());
                     table[this.x][this.y]=null;
                     table[x+i][y] = new Queen(x+i,y,this.color);
@@ -173,7 +180,7 @@ public class Queen extends Piece{
                     res.add(newBoard);
                 }else{
                     if(board.getBoard()[x+i][y].getColor()!=color){
-                        Board newBoard = new Board();
+                        Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                         Piece[][] table = copyBoard(board.getBoard());
                         table[this.x][this.y]=null;
                         table[x+i][y] = new Queen(x+1,y,this.color);
@@ -190,7 +197,7 @@ public class Queen extends Piece{
         for(int i = 1; i<4;i++){
             if(y-i>=0){
                 if(board.getBoard()[x][y-i]==null){
-                    Board newBoard = new Board();
+                    Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                     Piece[][] table = copyBoard(board.getBoard());
                     table[this.x][this.y]=null;
                     table[x][y-i] = new Queen(x,y-i,this.color);
@@ -198,7 +205,7 @@ public class Queen extends Piece{
                     res.add(newBoard);
                 }else{
                     if(board.getBoard()[x][y-i].getColor()!=color){
-                        Board newBoard = new Board();
+                        Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                         Piece[][] table = copyBoard(board.getBoard());
                         table[this.x][this.y]=null;
                         table[x][y-i] = new Queen(x,y-i,this.color);
@@ -214,7 +221,7 @@ public class Queen extends Piece{
         for(int i = 1; i<4;i++){
             if(y+i<4){
                 if(board.getBoard()[x][y+i]==null){
-                    Board newBoard = new Board();
+                    Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                     Piece[][] table = copyBoard(board.getBoard());
                     table[this.x][this.y]=null;
                     table[x][y+i] = new Queen(x,y+i,this.color);
@@ -222,7 +229,7 @@ public class Queen extends Piece{
                     res.add(newBoard);
                 }else{
                     if(board.getBoard()[x][y+i].getColor()!=color){
-                        Board newBoard = new Board();
+                        Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                         Piece[][] table = copyBoard(board.getBoard());
                         table[this.x][this.y]=null;
                         table[x][y+i] = new Queen(x,y+i,this.color);
@@ -255,7 +262,7 @@ public class Queen extends Piece{
 
     @Override
     public boolean equals(Object o) {
-        if(o instanceof Queen ){
+        if(o instanceof Queen){
             Queen q = (Queen) o;
             if(this.x == q.getX() && this.y ==q.getY() && this.color == q.getColor()){
                 return true;

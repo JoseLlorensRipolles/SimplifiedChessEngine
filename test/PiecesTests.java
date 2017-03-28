@@ -32,7 +32,7 @@ public class PiecesTests {
 
     @Test
     public void should_move_correctly_the_queen(){
-        Board board = new Board();
+        Board board = new Board(Piece.WHITE,0,6);
         board.insertPiece(new Queen(1,1,Piece.WHITE));
         board.insertPiece(new Rook(2,1,Piece.WHITE));
         board.insertPiece(new Bishop(2,2,Piece.BLACK));
@@ -44,7 +44,7 @@ public class PiecesTests {
 
     @Test
     public void should_move_correctly_the_bishop(){
-        Board board = new Board();
+        Board board = new Board(Piece.WHITE,0,6);
         board.insertPiece(new Bishop(1,1,Piece.WHITE));
         board.insertPiece(new Rook(2,0,Piece.WHITE));
         board.insertPiece(new Queen(2,2,Piece.BLACK));
@@ -56,7 +56,7 @@ public class PiecesTests {
 
     @Test
     public void should_move_correctly_the_rook(){
-        Board board = new Board();
+        Board board = new Board(Piece.WHITE,0,6);
         board.insertPiece(new Rook(1,1,Piece.WHITE));
         board.insertPiece(new Rook(1,2,Piece.WHITE));
         board.insertPiece(new Queen(2,1,Piece.BLACK));
@@ -68,7 +68,7 @@ public class PiecesTests {
 
     @Test
     public void should_move_correctly_the_knight(){
-        Board board = new Board();
+        Board board = new Board(Piece.WHITE,0,6);
         board.insertPiece(new Knight(1,1,Piece.WHITE));
         board.insertPiece(new Rook(1,2,Piece.WHITE));
         board.insertPiece(new Queen(2,1,Piece.WHITE));

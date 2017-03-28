@@ -1,6 +1,7 @@
 import org.junit.Test;
 import Model.*;
 
+import javax.swing.text.Position;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -15,7 +16,7 @@ import static org.junit.Assert.assertThat;
 public class BoardTest {
     @Test
     public void should_create_a_empty_board(){
-        Board board = new Board ();
+        Board board = new Board(0,0,6);
         for(int i = 0; i<4;i++){
             for(int j = 0; j<4;j++){
                 assert(board.getBoard()[i][j]==null);
@@ -25,7 +26,7 @@ public class BoardTest {
 
     @Test
     public void should_insert_pieces_correctly(){
-        Board board = new Board();
+        Board board = new Board(Piece.WHITE,0,6);
         board.insertPiece("N B 2 W");
         board.insertPiece("Q B 1 W");
         board.insertPiece(new Rook(0,3,Piece.BLACK));
@@ -36,7 +37,7 @@ public class BoardTest {
 
     @Test
     public void should_return_color_pieces(){
-        Board board = new Board();
+        Board board = new Board(Piece.WHITE,0,6);
         Piece queen = new Queen(1,2,Piece.WHITE);
         Piece rook = new Rook(0,3,Piece.BLACK);
         Piece bishop = new Bishop(2,3,Piece.WHITE);

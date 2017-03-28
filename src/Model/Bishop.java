@@ -1,5 +1,6 @@
 package Model;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
  */
 public class Bishop extends Piece{
 
-    public Bishop(int x, int y,int color){
+    public Bishop(int x, int y, int color){
         name= "Bishop";
         value=3;
         this.x=x;
@@ -18,13 +19,19 @@ public class Bishop extends Piece{
 
     @Override
     public List<Board> posMov(Board board) {
-        List<Board> res = new LinkedList<>();
+        List<Board> res = new ArrayList<>();
+        int turn;
+        if(board.getTurn() == Piece.WHITE){
+            turn = Piece.BLACK;
+        }else{
+            turn = Piece.WHITE;
+        }
 
         for(int i = 1;i<4;i++){
             if(x-i>=0 && y-i >=0){
                 //If the destination is empty Bishop can go there
                 if(board.getBoard()[x-i][y-i] == null){
-                    Board newBoard = new Board();
+                    Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                     Piece[][] table = copyBoard(board.getBoard());
                     table[this.x][this.y]=null;
                     table[x-i][y-i] = new Bishop(x-i,y-i,this.color);
@@ -33,7 +40,7 @@ public class Bishop extends Piece{
 
                 }else {
                     if (board.getBoard()[x - i][y - i].getColor() != this.color) {
-                        Board newBoard = new Board();
+                        Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                         Piece[][] table = copyBoard(board.getBoard());
                         table[this.x][this.y]=null;
                         table[x-i][y-i] = new Bishop(x-i,y-i,this.color);
@@ -51,7 +58,7 @@ public class Bishop extends Piece{
         for(int i = 1;i<4;i++){
             if(x+i<4 && y+i <4){
                 if(board.getBoard()[x+i][y+i] == null){
-                    Board newBoard = new Board();
+                    Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                     Piece[][] table = copyBoard(board.getBoard());
                     table[this.x][this.y]=null;
                     table[x+i][y+i] = new Bishop(x+i,y+i,this.color);
@@ -59,7 +66,7 @@ public class Bishop extends Piece{
                     res.add(newBoard);
                 }else {
                     if (board.getBoard()[x + i][y + i].getColor() != this.color) {
-                        Board newBoard = new Board();
+                        Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                         Piece[][] table = copyBoard(board.getBoard());
                         table[this.x][this.y]=null;
                         table[x+i][y+i] = new Bishop(x+i,y+i,this.color);
@@ -76,7 +83,7 @@ public class Bishop extends Piece{
         for(int i = 1;i<4;i++){
             if(x-i>=0 && y+i <4){
                 if(board.getBoard()[x-i][y+i] == null){
-                    Board newBoard = new Board();
+                    Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                     Piece[][] table = copyBoard(board.getBoard());
                     table[this.x][this.y]=null;
                     table[x-i][y+i] = new Bishop(x-i,y+i,this.color);
@@ -84,7 +91,7 @@ public class Bishop extends Piece{
                     res.add(newBoard);
                 }else {
                     if (board.getBoard()[x-i][y + i].getColor() != this.color) {
-                        Board newBoard = new Board();
+                        Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                         Piece[][] table = copyBoard(board.getBoard());
                         table[this.x][this.y]=null;
                         table[x-i][y+i] = new Bishop(x-i,y+i,this.color);
@@ -102,7 +109,7 @@ public class Bishop extends Piece{
         for(int i = 1;i<4;i++){
             if(x+i<4 && y-i>=0){
                 if(board.getBoard()[x+i][y-i] == null){
-                    Board newBoard = new Board();
+                    Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                     Piece[][] table = copyBoard(board.getBoard());
                     table[this.x][this.y]=null;
                     table[x+i][y-i] = new Bishop(x+i,y-i,this.color);
@@ -110,7 +117,7 @@ public class Bishop extends Piece{
                     res.add(newBoard);
                 }else {
                     if (board.getBoard()[x+i][y-i].getColor() != this.color) {
-                        Board newBoard = new Board();
+                        Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                         Piece[][] table = copyBoard(board.getBoard());
                         table[this.x][this.y]=null;
                         table[x+i][y-i] = new Bishop(x+1,y-i,this.color);
@@ -134,7 +141,7 @@ public class Bishop extends Piece{
 
     @Override
     public boolean equals(Object o) {
-        if(o instanceof Bishop ){
+        if(o instanceof Bishop){
 
             Bishop q = (Bishop) o;
             if(this.x == q.getX() && this.y ==q.getY() && this.color == q.getColor()){

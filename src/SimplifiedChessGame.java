@@ -1,6 +1,5 @@
 import Model.Board;
 import Model.Piece;
-import Model.Position;
 
 import java.util.List;
 import java.util.Scanner;
@@ -17,14 +16,14 @@ public class SimplifiedChessGame {
             int nBlack = kb.nextInt();
             int nMoves = kb.nextInt();
             String trash = kb.nextLine();
-            Board board = new Board();
+            Board root = new Board(Piece.WHITE,0,nMoves);
             for(int j=0;j<nWhite;j++){
-                board.insertPiece(kb.nextLine()+" W");
+                root.insertPiece(kb.nextLine()+" W");
             }
             for(int j=0;j<nBlack;j++){
-                board.insertPiece(kb.nextLine()+" B");
+                root.insertPiece(kb.nextLine()+" B");
             }
-            Position root = new Position(board,Piece.WHITE,0,6);
+
             if(root.isWinForWhite()){
                 System.out.println("YES");
             }else{

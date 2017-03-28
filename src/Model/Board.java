@@ -12,13 +12,17 @@ public class Board {
     }
 
     Piece[][] board;
-    public Board(){
+    int turn, level, maxLevel;
+    public Board(int turn, int level, int maxLevel){
         board = new Piece[4][4];
         for(int i = 0; i<4;i++){
             for(int j = 0; j<4;j++){
                 board[i][j]=null;
             }
         }
+        this.turn= turn;
+        this.level =level;
+        this.maxLevel =maxLevel;
     }
 
     public boolean insertPiece(String data){
@@ -111,5 +115,66 @@ public class Board {
             }
         }
         return true;
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public boolean isWinForWhite() {
+        if(this.level==this.maxLevel){
+            return this.haveWhiteWinned();
+        }
+
+        if(this.haveWhiteWinned()){
+            return true;
+        }
+        if(this.haveWhiteLoosed()){
+            return false;
+        }
+
+        if(turn == Piece.WHITE){
+            List<Piece> whitepieces = this.getPiecesOfColor(Piece.WHITE);
+            List<Board> posPositions = new ArrayList<>();
+            for(Piece p : whitepieces){
+                for(Board b: p.posMov(this)){
+                    posPositions.add(b);
+                }
+            }
+            for(Board b: posPositions){
+                if(b.haveWhiteWinned()){
+                    return true;
+                }
+            }
+            for(Board b: posPositions){
+                if(b.isWinForWhite()){
+                    return true;
+                }
+            }
+            return false;
+        }else{
+            List<Piece> blackpieces = this.getPiecesOfColor(Piece.BLACK);
+            List<Board> posPositions = new ArrayList<>();
+            for(Piece p : blackpieces){
+                for(Board b: p.posMov(this)){
+                    posPositions.add(b);
+                }
+            }
+
+            for(Board b: posPositions){
+                if(b.haveWhiteLoosed()){
+                    return false;
+                }
+            }
+
+            for(Board b: posPositions){
+                if(!b.isWinForWhite()){
+                    return false;
+                }
+            }
+
+            return true;
+
+        }
     }
 }

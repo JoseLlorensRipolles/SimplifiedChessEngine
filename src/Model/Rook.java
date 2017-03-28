@@ -1,5 +1,6 @@
 package Model;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,11 +19,17 @@ public class Rook extends Piece {
 
     @Override
     public List<Board> posMov(Board board) {
-        List<Board> res = new LinkedList<>();
+        int turn;
+        if(board.getTurn() == Piece.WHITE){
+            turn = Piece.BLACK;
+        }else{
+            turn = Piece.WHITE;
+        }
+        List<Board> res = new ArrayList<>();
         for(int i = 1; i<4;i++){
             if(x-i>=0){
                 if(board.getBoard()[x-i][y]==null){
-                    Board newBoard = new Board();
+                    Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                     Piece[][] table = copyBoard(board.getBoard());
                     table[this.x][this.y]=null;
                     table[x-i][y] = new Rook(x-i,y,this.color);
@@ -30,7 +37,7 @@ public class Rook extends Piece {
                     res.add(newBoard);
                 }else{
                     if(board.getBoard()[x-i][y].getColor()!=color){
-                        Board newBoard = new Board();
+                        Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                         Piece[][] table = copyBoard(board.getBoard());
                         table[this.x][this.y]=null;
                         table[x-i][y] = new Rook(x-1,y,this.color);
@@ -46,7 +53,7 @@ public class Rook extends Piece {
         for(int i = 1; i<4;i++){
             if(x+i<4){
                 if(board.getBoard()[x+i][y]==null){
-                    Board newBoard = new Board();
+                    Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                     Piece[][] table = copyBoard(board.getBoard());
                     table[this.x][this.y]=null;
                     table[x+i][y] = new Rook(x+i,y,this.color);
@@ -54,7 +61,7 @@ public class Rook extends Piece {
                     res.add(newBoard);
                 }else{
                     if(board.getBoard()[x+i][y].getColor()!=color){
-                        Board newBoard = new Board();
+                        Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                         Piece[][] table = copyBoard(board.getBoard());
                         table[this.x][this.y]=null;
                         table[x+i][y] = new Rook(x+1,y,this.color);
@@ -71,7 +78,7 @@ public class Rook extends Piece {
         for(int i = 1; i<4;i++){
             if(y-i>=0){
                 if(board.getBoard()[x][y-i]==null){
-                    Board newBoard = new Board();
+                    Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                     Piece[][] table = copyBoard(board.getBoard());
                     table[this.x][this.y]=null;
                     table[x][y-i] = new Rook(x,y-i,this.color);
@@ -79,7 +86,7 @@ public class Rook extends Piece {
                     res.add(newBoard);
                 }else{
                     if(board.getBoard()[x][y-i].getColor()!=color){
-                        Board newBoard = new Board();
+                        Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                         Piece[][] table = copyBoard(board.getBoard());
                         table[this.x][this.y]=null;
                         table[x][y-i] = new Rook(x,y-i,this.color);
@@ -95,7 +102,7 @@ public class Rook extends Piece {
         for(int i = 1; i<4;i++){
             if(y+i<4){
                 if(board.getBoard()[x][y+i]==null){
-                    Board newBoard = new Board();
+                    Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                     Piece[][] table = copyBoard(board.getBoard());
                     table[this.x][this.y]=null;
                     table[x][y+i] = new Rook(x,y+i,this.color);
@@ -103,7 +110,7 @@ public class Rook extends Piece {
                     res.add(newBoard);
                 }else{
                     if(board.getBoard()[x][y+i].getColor()!=color){
-                        Board newBoard = new Board();
+                        Board newBoard = new Board(turn,board.level+1,board.maxLevel);
                         Piece[][] table = copyBoard(board.getBoard());
                         table[this.x][this.y]=null;
                         table[x][y+i] = new Rook(x,y+i,this.color);
@@ -136,7 +143,7 @@ public class Rook extends Piece {
     }
     @Override
     public boolean equals(Object o) {
-        if(o instanceof Rook ){
+        if(o instanceof Rook){
 
             Rook q = (Rook) o;
             if(this.x == q.getX() && this.y ==q.getY() && this.color == q.getColor()){
@@ -149,3 +156,4 @@ public class Rook extends Piece {
         }
     }
 }
+
